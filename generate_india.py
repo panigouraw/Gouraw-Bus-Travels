@@ -12,7 +12,7 @@ NOTE: this is generated demo data, not real operator timetables.
 import math
 from datetime import date, datetime, time, timedelta
 
-DAYS = 7          # days ahead to create schedules for
+DAYS = 30          # days ahead to create schedules for
 MAX_KM = 600      # longest straight-line distance for a direct route
 ROAD_FACTOR = 1.25  # straight line -> approx road distance
 

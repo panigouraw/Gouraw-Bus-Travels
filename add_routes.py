@@ -2,7 +2,7 @@ from datetime import date, time, timedelta
 from database import SessionLocal
 import models
 
-DAYS = 7  # how many days ahead to create schedules
+DAYS = 30  # how many days ahead to create schedules
 
 # (stop name, latitude, longitude) - approximate locations
 STOPS = {
