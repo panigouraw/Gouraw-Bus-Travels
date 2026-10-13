@@ -1,0 +1,1587 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gouraw Bus Travels</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Manrope:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0b1b33;
+        --ink2: #2a3f63;
+        --bg: #f4f6fb;
+        --line: #e3e8f0;
+        --muted: #5e6c84;
+        --brand: #ff9f1c;
+        --brand-d: #e58a00;
+        --red: #b3261e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          500 16px/1.5 Manrope,
+          system-ui,
+          sans-serif;
+      }
+      .big,
+      h1,
+      h2,
+      h3 {
+        font-family: "Bricolage Grotesque", Manrope, sans-serif;
+        letter-spacing: -0.02em;
+      }
+      .big {
+        font-weight: 800;
+        font-size: 1.25rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+        margin: 0 0 14px;
+      }
+      .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 0 18px;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      a {
+        color: inherit;
+      }
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(11, 27, 51, 0.94);
+        backdrop-filter: blur(10px);
+        color: #fff;
+      }
+      .nav .wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 62px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        font:
+          800 1.15rem "Bricolage Grotesque",
+          sans-serif;
+      }
+      .links {
+        display: flex;
+        gap: 4px;
+        margin-left: 10px;
+      }
+      .links a {
+        color: #c9d4e8;
+        padding: 8px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.93rem;
+      }
+      .links a.on,
+      .links a:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .sp {
+        flex: 1;
+      }
+      .who {
+        font-weight: 700;
+        font-size: 0.92rem;
+        margin-right: 8px;
+      }
+      #navUser {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      @media (max-width: 640px) {
+        .who,
+        .brand span {
+          display: none;
+        }
+        .links {
+          margin-left: 0;
+        }
+      }
+      .btn {
+        border: 0;
+        border-radius: 10px;
+        padding: 11px 18px;
+        font:
+          800 0.95rem Manrope,
+          sans-serif;
+        cursor: pointer;
+        background: var(--brand);
+        color: #2b1a00;
+        transition:
+          transform 0.15s,
+          background 0.15s;
+      }
+      .btn:hover {
+        background: var(--brand-d);
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1.5px solid currentColor;
+        color: inherit;
+      }
+      .btn.ghost:hover {
+        background: rgba(127, 127, 127, 0.12);
+      }
+      .btn.red {
+        background: var(--red);
+        color: #fff;
+      }
+      .btn.sm {
+        padding: 8px 14px;
+      }
+      .btn.full {
+        width: 100%;
+        margin-top: 6px;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      :is(input, select, .btn, .seat, a, .chip):focus-visible {
+        outline: 3px solid #ffc766;
+        outline-offset: 2px;
+      }
+      .hero {
+        background: linear-gradient(135deg, #0b1b33, #16306b 60%, #2b3fa3);
+        color: #fff;
+        padding: 54px 0 100px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero h1 {
+        font-size: clamp(2rem, 5vw, 3.3rem);
+        line-height: 1.08;
+        margin: 0 0 12px;
+        max-width: 620px;
+        position: relative;
+      }
+      .hero em {
+        font-style: normal;
+        color: var(--brand);
+      }
+      .hero p {
+        color: #b8c6e0;
+        max-width: 480px;
+        margin: 0;
+        position: relative;
+      }
+      .hero svg {
+        position: absolute;
+        right: -30px;
+        top: 8px;
+        width: 560px;
+        max-width: 68%;
+        opacity: 0.55;
+      }
+      main {
+        padding-bottom: 50px;
+      }
+      main > section {
+        display: none;
+        padding-top: 26px;
+      }
+      main > section.on {
+        display: block;
+      }
+      #v-home {
+        padding-top: 0;
+      }
+      .search {
+        margin-top: -62px;
+        position: relative;
+        background: #fff;
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 18px 40px -18px rgba(11, 27, 51, 0.4);
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr auto 1fr 170px auto;
+        align-items: end;
+      }
+      @media (max-width: 860px) {
+        .search {
+          grid-template-columns: 1fr 1fr;
+        }
+        .swap {
+          display: none;
+        }
+        .search .btn {
+          grid-column: 1/-1;
+        }
+      }
+      @media (max-width: 520px) {
+        .search {
+          grid-template-columns: 1fr;
+        }
+      }
+      label {
+        display: block;
+        font-size: 0.76rem;
+        font-weight: 800;
+        color: var(--muted);
+        margin: 0 0 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 12px 13px;
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        font:
+          600 1rem Manrope,
+          sans-serif;
+        background: #fff;
+        color: var(--ink);
+      }
+      .swap {
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border-radius: 50%;
+        background: #eef2fa;
+        color: var(--ink);
+        font-size: 1.1rem;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin: 16px 0 4px;
+      }
+      .chip {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        padding: 6px 13px;
+        font:
+          700 0.86rem Manrope,
+          sans-serif;
+        cursor: pointer;
+        color: var(--ink2);
+      }
+      .chip:hover {
+        border-color: var(--ink);
+      }
+      .perks {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 26px 0 0;
+      }
+      @media (max-width: 700px) {
+        .perks {
+          grid-template-columns: 1fr;
+        }
+      }
+      .perk {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px 16px;
+      }
+      .perk b {
+        display: block;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+        margin-bottom: 12px;
+      }
+      .empty {
+        background: #fff;
+        border: 1.5px dashed #c5cfdd;
+        border-radius: 16px;
+        padding: 22px;
+        text-align: center;
+        color: var(--muted);
+      }
+      .empty.err {
+        color: var(--red);
+        font-weight: 700;
+      }
+      .rh {
+        margin-top: 22px;
+      }
+      .res {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+        align-items: center;
+      }
+      @media (max-width: 560px) {
+        .res {
+          grid-template-columns: 1fr;
+        }
+      }
+      .tm {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font:
+          800 1.4rem "Bricolage Grotesque",
+          sans-serif;
+        margin-bottom: 8px;
+      }
+      .tm small {
+        display: block;
+        font:
+          600 0.78rem Manrope,
+          sans-serif;
+        color: var(--muted);
+      }
+      .ln {
+        flex: 0 1 80px;
+        min-width: 30px;
+        height: 2px;
+        background: repeating-linear-gradient(
+          90deg,
+          #b7c3d6 0 6px,
+          transparent 6px 10px
+        );
+      }
+      .tag {
+        display: inline-block;
+        background: #eef2fa;
+        border-radius: 6px;
+        padding: 2px 9px;
+        font-size: 0.76rem;
+        font-weight: 800;
+        color: var(--ink2);
+      }
+      .tag.low {
+        background: #ffe9e7;
+        color: var(--red);
+      }
+      .tag.ok {
+        background: #e3f6ec;
+        color: #12703f;
+      }
+      .tag.off {
+        background: #edeff3;
+        color: var(--muted);
+      }
+      .pr {
+        text-align: right;
+      }
+      .pr .big {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+      }
+      .steps {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 18px;
+        padding: 0;
+        list-style: none;
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--muted);
+      }
+      .steps li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .steps li::before {
+        content: attr(data-n);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--line);
+        display: grid;
+        place-items: center;
+        font-size: 0.76rem;
+      }
+      .steps li:not(:last-child)::after {
+        content: "";
+        width: 20px;
+        height: 2px;
+        background: var(--line);
+        margin-left: 4px;
+      }
+      .steps li.on {
+        color: var(--ink);
+      }
+      .steps li.on::before {
+        background: var(--brand);
+      }
+      .steps li.done {
+        color: var(--ink);
+      }
+      .steps li.done::before {
+        content: "✓";
+        background: var(--ink);
+        color: #fff;
+      }
+      .back {
+        background: none;
+        border: 0;
+        padding: 0 0 12px;
+        font:
+          700 0.92rem Manrope,
+          sans-serif;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      .seatwrap {
+        display: grid;
+        grid-template-columns: minmax(0, 340px) 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+      @media (max-width: 760px) {
+        .seatwrap {
+          grid-template-columns: 1fr;
+        }
+      }
+      .deck {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 26px 26px 14px 14px;
+        padding: 18px;
+      }
+      .deck > small {
+        display: block;
+        text-align: right;
+        font-weight: 800;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+      .seats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 18px 1fr 1fr;
+        gap: 9px;
+      }
+      .seat {
+        padding: 10px 0;
+        border: 1.5px solid #b7c3d6;
+        background: #fff;
+        border-radius: 9px 9px 5px 5px;
+        font:
+          800 0.9rem Manrope,
+          sans-serif;
+        color: var(--ink);
+        cursor: pointer;
+      }
+      .seat:hover {
+        border-color: var(--ink);
+      }
+      .seat.pick {
+        background: var(--brand);
+        border-color: var(--brand-d);
+      }
+      .seat.taken {
+        background: repeating-linear-gradient(
+          45deg,
+          #e9edf3 0 5px,
+          #dee4ec 5px 10px
+        );
+        border-color: #dee4ec;
+        color: #97a3b5;
+        cursor: not-allowed;
+      }
+      .sum {
+        position: sticky;
+        top: 78px;
+      }
+      .pk {
+        margin: 12px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .tot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px dashed var(--line);
+        padding-top: 12px;
+        margin-bottom: 12px;
+      }
+      .legend {
+        display: flex;
+        gap: 14px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 12px;
+      }
+      .legend i {
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        border: 1.5px solid #b7c3d6;
+        border-radius: 3px;
+        vertical-align: -2px;
+        margin-right: 4px;
+      }
+      .r3 {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 2fr 1fr 1.2fr;
+      }
+      .r2 {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+      }
+      @media (max-width: 560px) {
+        .r3,
+        .r2 {
+          grid-template-columns: 1fr;
+        }
+      }
+      .err {
+        color: var(--red);
+        font-weight: 700;
+        font-size: 0.9rem;
+        min-height: 1.3em;
+        margin: 8px 0;
+      }
+      .ticket {
+        background: #fff;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        box-shadow: 0 14px 34px -20px rgba(11, 27, 51, 0.5);
+        overflow: hidden;
+      }
+      .ticket .top {
+        padding: 20px;
+        background: linear-gradient(135deg, #0b1b33, #1b3a82);
+        color: #fff;
+      }
+      .ticket .code {
+        font:
+          800 1.9rem "Bricolage Grotesque",
+          sans-serif;
+        letter-spacing: 0.06em;
+        color: var(--brand);
+        margin: 2px 0 6px;
+      }
+      .ticket.void .top {
+        background: #59657a;
+      }
+      .ticket.void .code {
+        color: #dde3ec;
+        text-decoration: line-through;
+      }
+      .mid {
+        padding: 16px 20px;
+        border-top: 2px dashed var(--line);
+        position: relative;
+      }
+      .mid::before,
+      .mid::after {
+        content: "";
+        position: absolute;
+        top: -11px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--bg);
+      }
+      .mid::before {
+        left: -11px;
+      }
+      .mid::after {
+        right: -11px;
+      }
+      .rt {
+        font:
+          800 1.3rem "Bricolage Grotesque",
+          sans-serif;
+      }
+      .bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .pass {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 0;
+        border-bottom: 1px solid #edf1f4;
+      }
+      .pass:last-child {
+        border: 0;
+      }
+      .bkh,
+      .bkf {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .bkf {
+        margin-top: 12px;
+      }
+      .acts {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .route {
+        list-style: none;
+        margin: 16px 0 0;
+        padding: 0;
+      }
+      .route li {
+        position: relative;
+        padding: 0 0 22px 34px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .route li::before {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 6px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid #c5cfdd;
+      }
+      .route li::after {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 22px;
+        bottom: -4px;
+        width: 2px;
+        background: #c5cfdd;
+      }
+      .route li:last-child::after {
+        display: none;
+      }
+      .route li.passed {
+        color: var(--ink);
+      }
+      .route li.passed::before,
+      .route li.passed::after {
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+      .route li.current {
+        color: var(--ink);
+        font-weight: 800;
+        font-size: 1.1rem;
+      }
+      .route li.current::before {
+        background: var(--brand);
+        border-color: var(--ink);
+        width: 18px;
+        height: 18px;
+        left: 6px;
+        top: 5px;
+      }
+      .route .tag {
+        margin-left: 8px;
+        background: #fff1cc;
+      }
+      dialog {
+        border: 0;
+        border-radius: 18px;
+        padding: 0;
+        width: min(420px, 92vw);
+        box-shadow: 0 30px 80px rgba(11, 27, 51, 0.45);
+        color: var(--ink);
+      }
+      dialog::backdrop {
+        background: rgba(11, 27, 51, 0.55);
+        backdrop-filter: blur(3px);
+      }
+      .dlg {
+        padding: 24px;
+      }
+      .tabs {
+        display: flex;
+        gap: 6px;
+        background: #eef2fa;
+        border-radius: 10px;
+        padding: 4px;
+        margin-bottom: 14px;
+      }
+      .tabs button {
+        flex: 1;
+        border: 0;
+        background: transparent;
+        padding: 9px;
+        border-radius: 8px;
+        font:
+          800 0.92rem Manrope,
+          sans-serif;
+        cursor: pointer;
+        color: var(--muted);
+      }
+      .tabs button.on {
+        background: #fff;
+        color: var(--ink);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);
+      }
+      .fld {
+        margin-bottom: 12px;
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translate(-50%, 20px);
+        background: var(--ink);
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-weight: 700;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.25s;
+        z-index: 60;
+        max-width: 92vw;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      .toast.bad {
+        background: var(--red);
+      }
+      .foot {
+        padding: 10px 18px 30px;
+        color: var(--muted);
+        font-size: 0.85rem;
+        text-align: center;
+      }
+      @media print {
+        .nav,
+        .hero,
+        .steps,
+        .noprint,
+        .foot,
+        .toast {
+          display: none !important;
+        }
+        body {
+          background: #fff;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="wrap">
+        <a class="brand" href="#" data-v="home"
+          ><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="3" y="6" width="26" height="18" rx="5" fill="#FF9F1C" />
+            <rect x="7" y="10" width="18" height="7" rx="2" fill="#0B1B33" />
+            <circle cx="10" cy="26" r="3" fill="#fff" />
+            <circle cx="22" cy="26" r="3" fill="#fff" /></svg
+          ><span>Gouraw Bus Travels</span></a
+        >
+        <div class="links">
+          <a href="#" data-v="home">Book tickets</a
+          ><a href="#" data-v="mine">My bookings</a>
+        </div>
+        <div class="sp"></div>
+        <div id="navUser"></div>
+      </div>
+    </nav>
+
+    <header class="hero" id="hero">
+      <svg aria-hidden="true" viewBox="0 0 560 300" fill="none">
+        <path
+          d="M10 250C120 250 140 90 280 120S440 230 550 40"
+          stroke="#fff"
+          stroke-width="3"
+          stroke-dasharray="3 12"
+          stroke-linecap="round"
+        />
+        <g fill="#FF9F1C">
+          <circle cx="10" cy="250" r="9" />
+          <circle cx="280" cy="120" r="9" />
+          <circle cx="550" cy="40" r="9" />
+        </g>
+      </svg>
+      <div class="wrap">
+        <h1>Travel across India, <em>one seat</em> at a time.</h1>
+        <p>
+          Search a route, pick your seat, book in minutes and follow your bus
+          live.
+        </p>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <ol class="steps" id="steps" hidden>
+        <li data-n="1">Search</li>
+        <li data-n="2">Seats</li>
+        <li data-n="3">Passengers</li>
+        <li data-n="4">Ticket</li>
+      </ol>
+
+      <section id="v-home" class="on">
+        <div class="search">
+          <div>
+            <label for="from">From</label
+            ><input id="from" list="cities" value="Kadapa" autocomplete="off" />
+          </div>
+          <button
+            class="btn swap"
+            id="swap"
+            aria-label="Swap cities"
+            title="Swap"
+          >
+            ⇄
+          </button>
+          <div>
+            <label for="to">To</label
+            ><input id="to" list="cities" value="Tirupati" autocomplete="off" />
+          </div>
+          <div>
+            <label for="date">Date</label><input id="date" type="date" />
+          </div>
+          <button class="btn" id="btnSearch">Search buses</button>
+        </div>
+        <datalist id="cities"></datalist>
+        <div class="chips">
+          <span class="sub">Popular:</span><span id="chips"></span>
+        </div>
+        <div id="results"></div>
+        <div class="perks">
+          <div class="perk">
+            <b>Live bus tracking</b
+            ><span class="sub">Follow your bus stop by stop.</span>
+          </div>
+          <div class="perk">
+            <b>Instant e-ticket</b
+            ><span class="sub">Booking code and ticket in seconds.</span>
+          </div>
+          <div class="perk">
+            <b>Easy cancellation</b
+            ><span class="sub">Cancel anytime before departure.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="v-seats">
+        <button class="back" data-go="home">← Back to buses</button>
+        <h2>Choose your seats</h2>
+        <div class="seatwrap">
+          <div>
+            <div class="deck">
+              <small>Front</small>
+              <div class="seats" id="seatGrid"></div>
+            </div>
+            <div class="legend">
+              <span><i></i>Available</span
+              ><span
+                ><i
+                  style="background: var(--brand); border-color: var(--brand-d)"
+                ></i
+                >Selected</span
+              ><span><i style="background: #dee4ec"></i>Booked</span>
+            </div>
+          </div>
+          <div class="card sum">
+            <div id="sumBody"></div>
+            <button class="btn full" id="btnToForm" disabled>Continue</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="v-form">
+        <button class="back" data-go="seats">← Back to seats</button>
+        <h2>Passenger details</h2>
+        <div id="passForm"></div>
+        <div class="card">
+          <div class="r2">
+            <div>
+              <label for="email">Email</label
+              ><input id="email" type="email" autocomplete="email" />
+            </div>
+            <div>
+              <label for="mobile">Mobile number</label
+              ><input
+                id="mobile"
+                inputmode="numeric"
+                maxlength="10"
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="err" id="formErr" role="alert"></div>
+        <button class="btn full" id="btnBook">Confirm booking</button>
+      </section>
+
+      <section id="v-ticket">
+        <h2>Your ticket</h2>
+        <div id="ticketBox"></div>
+        <div class="r2 noprint" style="margin-top: 14px">
+          <button class="btn" id="btnTrack">Track my bus</button
+          ><button class="btn ghost" id="btnPrint">Print ticket</button>
+        </div>
+        <p class="noprint">
+          <button class="back" id="btnMine">View all my bookings →</button>
+        </p>
+      </section>
+
+      <section id="v-mine">
+        <h2>My bookings</h2>
+        <div id="mineList"></div>
+      </section>
+
+      <section id="v-track">
+        <button class="back" data-go="mine">← My bookings</button>
+        <h2 id="trTitle">Live tracking</h2>
+        <div class="card">
+          <div class="big" id="trMsg"></div>
+          <div class="sub" id="trSub"></div>
+          <ol class="route" id="trList"></ol>
+        </div>
+        <div class="r2">
+          <button class="btn ghost" id="btnRefresh">Refresh now</button
+          ><button class="btn ghost" id="btnDemo">
+            Demo: move bus to next stop
+          </button>
+        </div>
+        <p class="sub">
+          Refreshes every 5 seconds. The demo button stands in for the driver's
+          GPS until a real device is connected.
+        </p>
+      </section>
+    </main>
+    <footer class="foot">
+      Demo project built with FastAPI, MySQL and JavaScript. Routes and
+      timetables are generated demo data.
+    </footer>
+
+    <dialog id="authDlg">
+      <div class="dlg">
+        <div class="tabs">
+          <button class="on" data-t="login">Log in</button
+          ><button data-t="signup">Sign up</button>
+        </div>
+        <p class="sub" id="authMsg"></p>
+        <form id="fLogin">
+          <div class="fld">
+            <label for="lEmail">Email</label
+            ><input id="lEmail" type="email" autocomplete="email" required />
+          </div>
+          <div class="fld">
+            <label for="lPass">Password</label
+            ><input
+              id="lPass"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+          <button class="btn full">Log in</button>
+        </form>
+        <form id="fSign" hidden>
+          <div class="fld">
+            <label for="sName">Full name</label
+            ><input id="sName" autocomplete="name" required minlength="2" />
+          </div>
+          <div class="fld">
+            <label for="sEmail">Email</label
+            ><input id="sEmail" type="email" autocomplete="email" required />
+          </div>
+          <div class="fld">
+            <label for="sMob">Mobile number</label
+            ><input
+              id="sMob"
+              inputmode="numeric"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              title="10 digits"
+              required
+            />
+          </div>
+          <div class="fld">
+            <label for="sPass">Password (8+ characters)</label
+            ><input
+              id="sPass"
+              type="password"
+              autocomplete="new-password"
+              minlength="8"
+              maxlength="64"
+              required
+            />
+          </div>
+          <button class="btn full">Create account</button>
+        </form>
+        <div class="err" id="authErr" role="alert"></div>
+      </div>
+    </dialog>
+
+    <dialog id="cfmDlg">
+      <div class="dlg">
+        <h3 style="margin: 0 0 8px">Cancel this booking?</h3>
+        <p id="cfmB"></p>
+        <div class="r2">
+          <button class="btn ghost" id="cfmNo">Keep booking</button
+          ><button class="btn red" id="cfmYes">Yes, cancel</button>
+        </div>
+      </div>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      const API = "http://127.0.0.1:8000";
+      const $ = (id) => document.getElementById(id);
+      const esc = (s) =>
+        String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const hm = (t) => String(t).slice(0, 5);
+      const inr = (n) => "₹" + Number(n).toLocaleString("en-IN");
+      const iso = (d) =>
+        new Date(d.getTime() - d.getTimezoneOffset() * 6e4)
+          .toISOString()
+          .slice(0, 10);
+      const mins = (t) =>
+        parseInt(t.slice(0, 2)) * 60 + parseInt(t.slice(3, 5));
+      const dur = (a, b) => {
+        let m = mins(b) - mins(a);
+        if (m <= 0) m += 1440;
+        return Math.floor(m / 60) + "h" + (m % 60 ? " " + (m % 60) + "m" : "");
+      };
+      const store = {
+        get: (k) => {
+          try {
+            return localStorage.getItem(k);
+          } catch (e) {
+            return null;
+          }
+        },
+        set: (k, v) => {
+          try {
+            v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v);
+          } catch (e) {}
+        },
+      };
+      const S = {
+        user: null,
+        token: null,
+        q: null,
+        res: [],
+        cur: null,
+        sd: null,
+        pick: [],
+        booking: null,
+        list: [],
+        timer: null,
+        after: null,
+        tid: null,
+        cc: null,
+      };
+
+      let tt;
+      function toast(m, bad) {
+        const t = $("toast");
+        t.textContent = m;
+        t.className = "toast show" + (bad ? " bad" : "");
+        clearTimeout(tt);
+        tt = setTimeout(() => (t.className = "toast"), 3800);
+      }
+
+      const FLOW = { seats: 2, form: 3, ticket: 4 };
+      function view(v, noSteps) {
+        document
+          .querySelectorAll("main>section")
+          .forEach((s) => s.classList.toggle("on", s.id === "v-" + v));
+        $("hero").hidden = v !== "home";
+        const tab = v === "mine" ? "mine" : "home";
+        document
+          .querySelectorAll(".links a")
+          .forEach((a) => a.classList.toggle("on", a.dataset.v === tab));
+        const n = noSteps ? 0 : FLOW[v];
+        $("steps").hidden = !n;
+        [...$("steps").children].forEach(
+          (li, i) =>
+            (li.className = i + 1 < n ? "done" : i + 1 === n ? "on" : ""),
+        );
+        if (v !== "track") clearInterval(S.timer);
+        window.scrollTo(0, 0);
+      }
+      function go(v) {
+        if (v === "mine") {
+          if (!S.user)
+            return openAuth("login", "Log in to see your bookings", () =>
+              go("mine"),
+            );
+          view("mine");
+          return loadMine();
+        }
+        view(v);
+      }
+      document.querySelectorAll("[data-v]").forEach(
+        (a) =>
+          (a.onclick = (e) => {
+            e.preventDefault();
+            go(a.dataset.v);
+          }),
+      );
+      document
+        .querySelectorAll("[data-go]")
+        .forEach((b) => (b.onclick = () => view(b.dataset.go)));
+
+      async function api(path, o = {}) {
+        const h = {};
+        if (o.body) h["Content-Type"] = "application/json";
+        if (S.token) h.Authorization = "Bearer " + S.token;
+        let res;
+        try {
+          res = await fetch(API + path, {
+            method: o.method || "GET",
+            headers: h,
+            body: o.body ? JSON.stringify(o.body) : undefined,
+          });
+        } catch (e) {
+          throw new Error(
+            "Cannot reach the server. Start it with: python -m uvicorn main:app --reload",
+          );
+        }
+        const d = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          if (res.status === 401 && S.token) setSession(null, null);
+          const x = d.detail;
+          throw Object.assign(
+            new Error(
+              Array.isArray(x)
+                ? x.map((i) => i.msg.replace("Value error, ", "")).join(". ")
+                : x || "Something went wrong",
+            ),
+            { status: res.status },
+          );
+        }
+        return d;
+      }
+
+      /* ---------- login / session ---------- */
+      function setSession(token, user) {
+        S.token = token;
+        S.user = user;
+        store.set("bt_token", token);
+        renderNav();
+      }
+      function renderNav() {
+        const n = $("navUser");
+        if (S.user) {
+          n.innerHTML = `<span class="who">Hi, ${esc(S.user.name.split(" ")[0])}</span><button class="btn ghost sm" id="logout">Log out</button>`;
+          $("logout").onclick = () => {
+            setSession(null, null);
+            toast("Logged out");
+            view("home");
+          };
+        } else {
+          n.innerHTML =
+            '<button class="btn ghost sm" id="nLogin">Log in</button><button class="btn sm" id="nSign">Sign up</button>';
+          $("nLogin").onclick = () => openAuth("login");
+          $("nSign").onclick = () => openAuth("signup");
+        }
+      }
+      function authTab(t) {
+        document
+          .querySelectorAll(".tabs button")
+          .forEach((b) => b.classList.toggle("on", b.dataset.t === t));
+        $("fLogin").hidden = t !== "login";
+        $("fSign").hidden = t !== "signup";
+        $("authErr").textContent = "";
+      }
+      document
+        .querySelectorAll(".tabs button")
+        .forEach((b) => (b.onclick = () => authTab(b.dataset.t)));
+      function openAuth(mode, msg, after) {
+        S.after = after || null;
+        authTab(mode || "login");
+        $("authMsg").textContent = msg || "";
+        $("authDlg").showModal();
+      }
+      async function authSubmit(path, body) {
+        $("authErr").textContent = "";
+        try {
+          const d = await api(path, { method: "POST", body });
+          setSession(d.token, d.user);
+          $("authDlg").close();
+          toast("Welcome, " + d.user.name.split(" ")[0] + "!");
+          const f = S.after;
+          S.after = null;
+          if (f) f();
+        } catch (e) {
+          $("authErr").textContent = e.message;
+        }
+      }
+      $("fLogin").onsubmit = (e) => {
+        e.preventDefault();
+        authSubmit("/auth/login", {
+          email: $("lEmail").value,
+          password: $("lPass").value,
+        });
+      };
+      $("fSign").onsubmit = (e) => {
+        e.preventDefault();
+        authSubmit("/auth/signup", {
+          name: $("sName").value,
+          email: $("sEmail").value,
+          mobile: $("sMob").value,
+          password: $("sPass").value,
+        });
+      };
+      ["authDlg", "cfmDlg"].forEach((id) =>
+        $(id).addEventListener("click", (e) => {
+          if (e.target.id === id) $(id).close();
+        }),
+      );
+
+      /* ---------- search ---------- */
+      const now = new Date();
+      $("date").min = iso(now);
+      $("date").max = iso(new Date(now.getTime() + 30 * 864e5));
+      $("date").value = iso(now);
+      api("/cities")
+        .then(
+          (c) =>
+            ($("cities").innerHTML = c
+              .map((x) => `<option value="${esc(x)}">`)
+              .join("")),
+        )
+        .catch(() => {});
+      [
+        ["Kadapa", "Tirupati"],
+        ["Kadapa", "Bengaluru"],
+        ["Hyderabad", "Vijayawada"],
+        ["Chennai", "Bengaluru"],
+        ["Pune", "Mumbai"],
+      ].forEach(([a, b]) => {
+        const c = document.createElement("button");
+        c.className = "chip";
+        c.textContent = a + " → " + b;
+        c.onclick = () => {
+          $("from").value = a;
+          $("to").value = b;
+          search();
+        };
+        $("chips").appendChild(c);
+      });
+      $("swap").onclick = () => {
+        const f = $("from").value;
+        $("from").value = $("to").value;
+        $("to").value = f;
+      };
+      $("btnSearch").onclick = search;
+      async function search() {
+        const q = {
+          source: $("from").value.trim(),
+          destination: $("to").value.trim(),
+          journey_date: $("date").value,
+        };
+        if (!q.source || !q.destination || !q.journey_date)
+          return toast("Enter From, To and date", 1);
+        const box = $("results");
+        box.innerHTML =
+          '<div class="empty" style="margin-top:22px">Looking for buses…</div>';
+        try {
+          const d = await api("/search?" + new URLSearchParams(q));
+          S.q = q;
+          if (!d.available) {
+            box.innerHTML =
+              '<div class="empty" style="margin-top:22px"><b>Buses not available</b><br>No buses on this route and date. Try another date or check the city names.</div>';
+            return;
+          }
+          S.res = d.buses;
+          box.innerHTML =
+            `<h2 class="rh">${d.buses.length} buses · ${esc(q.source)} → ${esc(q.destination)}</h2>` +
+            d.buses
+              .map(
+                (b, i) => `
+      <div class="card res"><div>
+        <div class="tm"><div>${hm(b.departure_time)}<small>${esc(q.source)}</small></div><span class="ln"></span><div>${hm(b.arrival_time)}<small>${esc(q.destination)}</small></div><span class="tag">${dur(b.departure_time, b.arrival_time)}</span></div>
+        <b>${esc(b.bus_name)}</b> <span class="tag">${esc(b.bus_type)}</span> <span class="tag ${b.available_seats < 6 ? "low" : "ok"}">${b.available_seats} seats left</span></div>
+        <div class="pr"><div class="big">${inr(b.price)}</div><button class="btn" data-i="${i}" ${b.available_seats ? "" : "disabled"}>Select seats</button></div></div>`,
+              )
+              .join("");
+          box
+            .querySelectorAll("[data-i]")
+            .forEach((x) => (x.onclick = () => openSeats(S.res[+x.dataset.i])));
+        } catch (e) {
+          box.innerHTML = `<div class="empty err" style="margin-top:22px">${esc(e.message)}</div>`;
+        }
+      }
+
+      /* ---------- seats ---------- */
+      async function openSeats(b) {
+        try {
+          S.sd = await api("/seats/" + b.schedule_id);
+          S.cur = b;
+          S.pick = [];
+          drawSeats();
+          view("seats");
+        } catch (e) {
+          toast(e.message, 1);
+        }
+      }
+      function drawSeats() {
+        const g = $("seatGrid");
+        g.innerHTML = "";
+        S.sd.seats.forEach((s, i) => {
+          if (i % 4 === 2) g.appendChild(document.createElement("div"));
+          const b = document.createElement("button");
+          b.className =
+            "seat" +
+            (s.status === "booked" ? " taken" : "") +
+            (S.pick.includes(s.seat_number) ? " pick" : "");
+          b.textContent = s.seat_number;
+          b.disabled = s.status === "booked";
+          b.setAttribute(
+            "aria-label",
+            "Seat " + s.seat_number + (b.disabled ? " booked" : ""),
+          );
+          b.onclick = () => {
+            const k = S.pick.indexOf(s.seat_number);
+            if (k >= 0) S.pick.splice(k, 1);
+            else if (S.pick.length < 6) S.pick.push(s.seat_number);
+            drawSeats();
+          };
+          g.appendChild(b);
+        });
+        const n = S.pick.length;
+        $("sumBody").innerHTML =
+          `<div class="big">${esc(S.cur.bus_name)}</div><div class="sub">${esc(S.q.source)} → ${esc(S.q.destination)} · ${esc(S.q.journey_date)} · ${hm(S.cur.departure_time)}</div>
+    <div class="pk">${n ? S.pick.map((s) => `<span class="tag">Seat ${esc(s)}</span>`).join("") : '<span class="sub">Tap a seat to select (max 6)</span>'}</div>
+    <div class="tot"><span class="sub">Total</span><span class="big">${inr(n * S.sd.price_per_seat)}</span></div>`;
+        $("btnToForm").disabled = !n;
+      }
+      $("btnToForm").onclick = () =>
+        S.user
+          ? showForm()
+          : openAuth("login", "Log in to continue with your booking", showForm);
+
+      /* ---------- passengers + booking ---------- */
+      function showForm() {
+        $("passForm").innerHTML = S.pick
+          .map(
+            (
+              s,
+              i,
+            ) => `<div class="card"><label>Passenger ${i + 1} · Seat ${esc(s)}</label><div class="r3">
+    <input data-f="name" placeholder="Full name" value="${i ? "" : esc(S.user.name)}" aria-label="Name for seat ${esc(s)}">
+    <input data-f="age" type="number" min="1" max="120" placeholder="Age" aria-label="Age for seat ${esc(s)}">
+    <select data-f="gender" aria-label="Gender for seat ${esc(s)}"><option value="">Gender</option><option>Male</option><option>Female</option><option>Other</option></select></div></div>`,
+          )
+          .join("");
+        $("email").value = S.user.email;
+        $("mobile").value = S.user.mobile;
+        $("formErr").textContent = "";
+        view("form");
+      }
+      $("btnBook").onclick = async () => {
+        const ps = [...$("passForm").children].map((c, i) => ({
+          name: c.querySelector('[data-f="name"]').value.trim(),
+          age: parseInt(c.querySelector('[data-f="age"]').value, 10) || 0,
+          gender: c.querySelector('[data-f="gender"]').value,
+          seat_number: S.pick[i],
+        }));
+        const err = (m) => ($("formErr").textContent = m);
+        if (ps.some((p) => p.name.length < 2 || !p.age || !p.gender))
+          return err("Enter name, age and gender for every passenger.");
+        $("btnBook").disabled = true;
+        err("");
+        try {
+          const d = await api("/book", {
+            method: "POST",
+            body: {
+              schedule_id: S.cur.schedule_id,
+              email: $("email").value,
+              mobile: $("mobile").value,
+              passengers: ps,
+            },
+          });
+          showTicket(d.booking);
+          view("ticket");
+          toast("Booking confirmed 🎉");
+        } catch (e) {
+          err(e.message);
+          if (e.status === 401)
+            openAuth("login", "Session expired. Please log in again");
+        }
+        $("btnBook").disabled = false;
+      };
+
+      /* ---------- ticket ---------- */
+      function showTicket(b) {
+        S.booking = b;
+        const x = b.status === "CANCELLED";
+        $("ticketBox").innerHTML = `<div class="ticket ${x ? "void" : ""}">
+    <div class="top"><div class="sub" style="color:#B8C6E0">Booking code</div><div class="code">${esc(b.booking_code)}</div><span class="tag ${x ? "off" : "ok"}">${x ? "Cancelled" : "Confirmed"}</span></div>
+    <div class="mid"><div class="rt">${esc(b.from)} → ${esc(b.to)}</div><div class="sub">${esc(b.bus_name)} · ${esc(b.bus_type)} · ${esc(b.journey_date)} · departs ${hm(b.departure_time)}</div></div>
+    <div class="mid">${b.passengers.map((p) => `<div class="pass"><span>${esc(p.name)} (${p.age}, ${esc(p.gender)})</span><b>Seat ${esc(p.seat_number)}</b></div>`).join("")}</div>
+    <div class="mid bar"><span class="sub">${x ? "Refunded" : "Total paid"}</span><span class="big">${inr(x ? b.refund_amount || 0 : b.total_amount)}</span></div></div>`;
+        $("btnTrack").hidden = x;
+      }
+      $("btnTrack").onclick = () =>
+        openTrack(S.booking.schedule_id, S.booking.bus_name);
+      $("btnPrint").onclick = () => window.print();
+      $("btnMine").onclick = () => go("mine");
+
+      /* ---------- my bookings + cancel ---------- */
+      async function loadMine() {
+        const box = $("mineList");
+        box.innerHTML = '<div class="empty">Loading your bookings…</div>';
+        try {
+          const d = await api("/my-bookings");
+          S.list = d.bookings;
+          if (!d.count) {
+            box.innerHTML =
+              '<div class="empty"><b>No bookings yet</b><br>Your tickets will show up here.<br><br><button class="btn" id="firstTrip">Book your first trip</button></div>';
+            $("firstTrip").onclick = () => go("home");
+            return;
+          }
+          box.innerHTML = d.bookings
+            .map((b, i) => {
+              const x = b.status === "CANCELLED";
+              return `<div class="card">
+      <div class="bkh"><span class="big">${esc(b.from)} → ${esc(b.to)}</span><span class="tag ${x ? "off" : "ok"}">${x ? "Cancelled" : "Confirmed"}</span></div>
+      <div class="sub">${esc(b.journey_date)} · departs ${hm(b.departure_time)} · ${esc(b.bus_name)} · Seat ${b.passengers.map((p) => esc(p.seat_number)).join(", ")}</div>
+      <div class="bkf"><span><b>${esc(b.booking_code)}</b> · ${inr(b.total_amount)}${x ? " · refunded " + inr(b.refund_amount || 0) : ""}</span>
+      <span class="acts"><button class="btn ghost sm" data-a="v" data-i="${i}">View ticket</button>${x ? "" : `<button class="btn ghost sm" data-a="t" data-i="${i}">Track</button>`}${b.can_cancel ? `<button class="btn red sm" data-a="c" data-i="${i}">Cancel</button>` : ""}</span></div></div>`;
+            })
+            .join("");
+        } catch (e) {
+          box.innerHTML = `<div class="empty err">${esc(e.message)}</div>`;
+          if (e.status === 401)
+            openAuth("login", "Session expired. Please log in again", () =>
+              go("mine"),
+            );
+        }
+      }
+      $("mineList").onclick = (e) => {
+        const btn = e.target.closest("button[data-a]");
+        if (!btn) return;
+        const b = S.list[+btn.dataset.i],
+          a = btn.dataset.a;
+        if (a === "v") {
+          showTicket(b);
+          view("ticket", 1);
+        } else if (a === "t") openTrack(b.schedule_id, b.bus_name);
+        else {
+          S.cc = b.booking_code;
+          $("cfmB").innerHTML =
+            `Booking <b>${esc(b.booking_code)}</b> · ${esc(b.from)} → ${esc(b.to)}<br>You will get <b>${inr(b.refund_if_cancelled)}</b> back.<br><span class="sub">Refund: 90% if 24h+ before departure, 50% for 6 to 24h, none within 6h.</span>`;
+          $("cfmDlg").showModal();
+        }
+      };
+      $("cfmNo").onclick = () => $("cfmDlg").close();
+      $("cfmYes").onclick = async () => {
+        $("cfmDlg").close();
+        try {
+          const d = await api(`/booking/${S.cc}/cancel`, { method: "POST" });
+          toast(d.message);
+          loadMine();
+        } catch (e) {
+          toast(e.message, 1);
+        }
+      };
+
+      /* ---------- live tracking ---------- */
+      function openTrack(id, name) {
+        S.tid = id;
+        $("trTitle").textContent = name + " · live tracking";
+        view("track");
+        loadTrack();
+        S.timer = setInterval(loadTrack, 5000);
+      }
+      async function loadTrack() {
+        try {
+          const d = await api("/track/" + S.tid);
+          $("trMsg").textContent = d.message;
+          $("trSub").textContent = d.started
+            ? (d.next_stop ? "Next stop: " + d.next_stop : "Journey complete") +
+              " · updated " +
+              d.updated_at.slice(11, 19)
+            : d.bus_name;
+          $("trList").innerHTML = d.stops
+            .map(
+              (s) =>
+                `<li class="${s.status}">${esc(s.stop_name)}${s.status === "current" ? '<span class="tag">Bus is here</span>' : ""}</li>`,
+            )
+            .join("");
+        } catch (e) {
+          $("trMsg").textContent = e.message;
+        }
+      }
+      $("btnRefresh").onclick = loadTrack;
+      $("btnDemo").onclick = async () => {
+        try {
+          await api("/track/" + S.tid + "/next", { method: "POST" });
+          loadTrack();
+        } catch (e) {
+          toast(e.message, 1);
+        }
+      };
+
+      /* ---------- start ---------- */
+      renderNav();
+      const saved = store.get("bt_token");
+      if (saved) {
+        S.token = saved;
+        api("/auth/me")
+          .then((u) => setSession(saved, u))
+          .catch(() => setSession(null, null));
+      }
+      view("home");
+    </script>
+  </body>
+</html>
